@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<style>
+.app-header {
+	/* background-color: #1C283A !important; */
+	background-color: #4a87ee    !important;
+}
+
+.app-question-header {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-size: 16px;
+}
+
+.app-question {
+	/* background-color:#43cee6 !important; */
+	background-color:#66cc33   !important;
+}
+
+.app-result-text {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-size: 16px;
+	text-align: center;
+}
+
+</style>
+
+<html ng-app="myApp">
+	<head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title></title>
+		
+		<link href="https://code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet"/>
+		<script src="https://code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+    </head>
+ 
+	<body>
+	  <div ng-controller="MainCtrl">
+		<ion-nav-view animation="slide-left-right"></ion-nav-view>
+	  </div>
+		
+	  <script id="quiz.html" type="text/ng-template">
+		<ion-view>
+			<ion-header-bar class="bar-header app-header">
+				<h1 class="title" style="color:#1C283A;">I&E Day 2016</h1>
+			</ion-header-bar>    
+			<ion-content has-header="true" padding="true">
+			
+			<form ng-submit="computeResult()">
+				<div class="app-question-header">Please answer all the questions:</div>
+
+				<div class="app-question item item-divider item-text-wrap">Question 1</div>
+				<ion-radio class="item-text-wrap" ng-model="answers[0]" ng-value="'A'" name="q1">Choose A</ion-radio>
+				<ion-radio class="item-text-wrap" ng-model="answers[0]" ng-value="'B'" name="q1">Choose B</ion-radio>
+				<ion-radio class="item-text-wrap" ng-model="answers[0]" ng-value="'C'" name="q1">Choose C</ion-radio>
+				<br>
+				<div class="app-question item item-divider item-text-wrap">Question 2</div>
+				<ion-radio class="item-text-wrap" ng-model="answers[1]" ng-value="'A'" name="q2">Choose A</ion-radio>
+				<ion-radio class="item-text-wrap" ng-model="answers[1]" ng-value="'B'" name="q2">Choose B</ion-radio>
+				<ion-radio class="item-text-wrap" ng-model="answers[1]" ng-value="'C'" name="q2">Choose C</ion-radio>
+				<br>
+				<div class="app-question item item-divider item-text-wrap">Question 3</div>
+				<ion-radio class="item-text-wrap" ng-model="answers[2]" ng-value="'A'" name="q3">Choose A</ion-radio>
+				<ion-radio class="item-text-wrap" ng-model="answers[2]" ng-value="'B'" name="q3">Choose B</ion-radio>
+				<ion-radio class="item-text-wrap" ng-model="answers[2]" ng-value="'C'" name="q3">Choose C</ion-radio>
+
+				<br>
+				<button type="submit" class="button button-assertive">Submit</button>
+			</form>
+			
+			</ion-content>
+		</ion-view>
+	  </script>
+  
+	  <script id="result.html" type="text/ng-template">
+		<ion-view>
+			<ion-header-bar class="bar-header app-header">
+				<h1 class="title">Result Page</h1>
+			</ion-header-bar>        
+			<ion-content has-header="true" padding="true">
+				<div ng-if="numCorrectAns >= correctAns.length-1" class="app-result-text">
+					Congratulations!<br><br>
+					You have answered {{numCorrectAns}} / {{correctAns.length}} questions correctly.<br><br>
+					Please show this message to collect a prize.
+				</div>
+				<div ng-if="numCorrectAns < correctAns.length-1">
+					You have answered {{numCorrectAns}} / {{correctAns.length}} questions correctly.<br><br>
+					Please try again<br><br>
+					<!-- <a class="button icon-left ion-home" href="#/">Go back!</a> -->
+					<a class="button button-assertive" ng-click="back()">Go back!</a>
+				</div>
+			</ion-content>
+		</ion-view>
+	  </script>  
+	</body>
+</html>
+
+<script>
+var app = angular.module('myApp', ['ionic']);
+
+app.config(function($stateProvider, $urlRouterProvider) {
+	$stateProvider
+	  .state('index', {
+		url: '/',
+		templateUrl: 'quiz.html'
+	  })
+	  .state('result', {
+		url: '/result',
+		templateUrl: 'result.html'
+	  });
+	  
+	$urlRouterProvider.otherwise('/');  
+});
+ 
+app.controller('MainCtrl', function($scope, $state, $ionicPopup) {
+
+	$scope.answers = [null, null, null]; 			// Initialize model here
+	$scope.correctAns = ['A', 'B', 'C'];
+		
+	$scope.computeResult = function () {
+		console.log($scope.answers);
+		
+		$scope.numCorrectAns = 0;
+		for (var i=0; i<$scope.answers.length; i++) {
+			if ($scope.answers[i] == null) {
+				//console.log('Please answer all the questions');
+				var alertPopup = $ionicPopup.alert({
+					title: 'Incomplete',
+					template: 'Please answer all the questions.'
+				});
+				return;
+			} else {
+				if ($scope.answers[i] == $scope.correctAns[i])
+					$scope.numCorrectAns++;
+			}
+		}
+		
+		console.log('Num of correct answers = ' + $scope.numCorrectAns);
+		$scope.answers = [null, null, null]; 	// reset form
+		$state.go('result');
+    };
+
+	$scope.back = function() {
+		$state.go('index');
+	};
+
+});
+</script>
