@@ -38,7 +38,7 @@ app.controller('MainCtrl', function($scope, $state, $ionicPopup) {
 		}
 		
 		console.log('Num of correct answers = ' + $scope.numCorrectAns);
-		$scope.answers = [null, null, null]; 	// reset form
+		//$scope.answers = [null, null, null]; 	// reset form
 		$state.go('result');
     };
 

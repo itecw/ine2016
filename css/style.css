@@ -1,9 +1,8 @@
-.app-header {
-	/* background-color: #1C283A !important; */
-	background-color: #4a87ee    !important;
+.app-content {
+	background-color: #f3f6f6;
 }
 
-.app-question-header {
+.app-question-heading {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	font-size: 16px;
@@ -14,9 +13,20 @@
 	background-color:#66cc33   !important;
 }
 
+.app-result-card {
+	background-color: #bdc3c7; 
+	/* color: #1C283A; */
+	color: black;
+}
+
 .app-result-text {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	font-size: 16px;
 	text-align: center;
+}
+
+.app-result-icon {
+	font-size: 50px;
+	color: red;
 }
