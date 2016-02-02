@@ -19,29 +19,18 @@
 		
 	  <script id="quiz.html" type="text/ng-template">
 		<ion-view>
-
 			<ion-content padding="true" class="app-content">
 				<img src="img/logo.jpg" alt="logo" height="60" width="60"> 
 				
 				<form ng-submit="computeResult()">
 					<div class="app-question-heading">Please answer all the questions:</div>
-
-					<div class="app-question item item-divider item-text-wrap">Question 1</div>
-					<ion-radio class="item-text-wrap" ng-model="answers[0]" ng-value="'A'" name="q1">Choose A</ion-radio>
-					<ion-radio class="item-text-wrap" ng-model="answers[0]" ng-value="'B'" name="q1">Choose B</ion-radio>
-					<ion-radio class="item-text-wrap" ng-model="answers[0]" ng-value="'C'" name="q1">Choose C</ion-radio>
-					<br>
-					<div class="app-question item item-divider item-text-wrap">Question 2</div>
-					<ion-radio class="item-text-wrap" ng-model="answers[1]" ng-value="'A'" name="q2">Choose A</ion-radio>
-					<ion-radio class="item-text-wrap" ng-model="answers[1]" ng-value="'B'" name="q2">Choose B</ion-radio>
-					<ion-radio class="item-text-wrap" ng-model="answers[1]" ng-value="'C'" name="q2">Choose C</ion-radio>
-					<br>
-					<div class="app-question item item-divider item-text-wrap">Question 3</div>
-					<ion-radio class="item-text-wrap" ng-model="answers[2]" ng-value="'A'" name="q3">Choose A</ion-radio>
-					<ion-radio class="item-text-wrap" ng-model="answers[2]" ng-value="'B'" name="q3">Choose B</ion-radio>
-					<ion-radio class="item-text-wrap" ng-model="answers[2]" ng-value="'C'" name="q3">Choose C</ion-radio>
-
-					<br>
+					<div ng-repeat="question in questions">
+						<div class="app-question item item-divider item-text-wrap">{{$index+1}}. {{question.qn}}</div>			
+						<ion-list>
+							<ion-radio class="item-text-wrap" ng-repeat="opt in question.opts" ng-value="opt.val" ng-model="answers[$parent.$index]" ng-click="" name="{{question.id}}">{{optIndex($index)}}) {{opt.ans}}</ion-radio>
+						</ion-list>
+						<br>
+					</div>
 					<button type="submit" class="button button-assertive">Submit</button>
 				</form>
 				<br><br>
@@ -54,21 +43,20 @@
 			<ion-content padding="true" class="app-content">
 				<h2 style="text-align:center;margin-top:10px;color:#2c3e50;">I&E Day 2016</h2>
 			
-				<div ng-if="numCorrectAns >= correctAns.length-1" class="app-result-text">
+				<div ng-if="numCorrectAns >= minCorrectAns" class="app-result-text">
 					<div class="card"><div class="item item-text-wrap app-result-card">
 						<a class="icon ion-happy-outline app-result-icon"></a><br><br>
 						Congratulations!<br><br>
-						You have answered {{numCorrectAns}} / {{correctAns.length}} questions correctly.<br><br>
+						You have answered {{numCorrectAns}} / {{questions.length}} questions correctly.<br><br>
 						Please show this message to collect a prize.<br>
 					</div></div>
 				</div>
-				<div ng-if="numCorrectAns < correctAns.length-1" class="app-result-text">
+				<div ng-if="numCorrectAns < minCorrectAns" class="app-result-text">
 					<div class="card"><div class="item item-text-wrap app-result-card">
 						<a class="icon ion-sad-outline app-result-icon"></a><br><br>
-						You have answered {{numCorrectAns}} / {{correctAns.length}} questions correctly.<br><br>
+						You have answered {{numCorrectAns}} / {{questions.length}} questions correctly.<br><br>
 						Please try again<br><br>
-						<!-- <a class="button icon-left ion-home" href="#/">Go back!</a> -->
-						<a class="button button-assertive" ng-click="back()">Go back!</a><br>
+						<a class="button button-assertive" ng-click="back()">Back</a><br>
 					</div></div>
 				</div>
 				<br><br>
