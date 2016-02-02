@@ -1,39 +1,15 @@
 <!DOCTYPE html>
 
-<style>
-.app-header {
-	/* background-color: #1C283A !important; */
-	background-color: #4a87ee    !important;
-}
-
-.app-question-header {
-	padding-top: 20px;
-	padding-bottom: 20px;
-	font-size: 16px;
-}
-
-.app-question {
-	/* background-color:#43cee6 !important; */
-	background-color:#66cc33   !important;
-}
-
-.app-result-text {
-	padding-top: 20px;
-	padding-bottom: 20px;
-	font-size: 16px;
-	text-align: center;
-}
-
-</style>
-
 <html ng-app="myApp">
 	<head>
         <meta charset="utf-8">
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <title></title>
 		
-		<link href="https://code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet"/>
-		<script src="https://code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet"/>
+		<link href="css/style.css" rel="stylesheet">
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+		<script src="js/app.js"></script>
     </head>
  
 	<body>
@@ -96,55 +72,3 @@
 	  </script>  
 	</body>
 </html>
-
-<script>
-var app = angular.module('myApp', ['ionic']);
-
-app.config(function($stateProvider, $urlRouterProvider) {
-	$stateProvider
-	  .state('index', {
-		url: '/',
-		templateUrl: 'quiz.html'
-	  })
-	  .state('result', {
-		url: '/result',
-		templateUrl: 'result.html'
-	  });
-	  
-	$urlRouterProvider.otherwise('/');  
-});
- 
-app.controller('MainCtrl', function($scope, $state, $ionicPopup) {
-
-	$scope.answers = [null, null, null]; 			// Initialize model here
-	$scope.correctAns = ['A', 'B', 'C'];
-		
-	$scope.computeResult = function () {
-		console.log($scope.answers);
-		
-		$scope.numCorrectAns = 0;
-		for (var i=0; i<$scope.answers.length; i++) {
-			if ($scope.answers[i] == null) {
-				//console.log('Please answer all the questions');
-				var alertPopup = $ionicPopup.alert({
-					title: 'Incomplete',
-					template: 'Please answer all the questions.'
-				});
-				return;
-			} else {
-				if ($scope.answers[i] == $scope.correctAns[i])
-					$scope.numCorrectAns++;
-			}
-		}
-		
-		console.log('Num of correct answers = ' + $scope.numCorrectAns);
-		$scope.answers = [null, null, null]; 	// reset form
-		$state.go('result');
-    };
-
-	$scope.back = function() {
-		$state.go('index');
-	};
-
-});
-</script>
