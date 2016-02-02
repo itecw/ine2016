@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'FontAwesome';
+    src:url('../lib/fonts/fontawesome-webfont.ttf') format('truetype');
+}
+
+.fa-gift:before {
+	font-family: 'FontAwesome';
+	content: "\f06b";
+	font-size: 60px;
+	color: #eb0000;
+}
+
 .app-content {
 	background-color: #f3f6f6;
 }
