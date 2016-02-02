@@ -45,33 +45,33 @@ app.controller('MainCtrl', function($scope, $state, $ionicPopup) {
 		},
 		{
 			id: 'q2',
-			qn: 'How many SEIT students went for overseas industrial attachment in Taiwan in 2015?',
+			qn: 'Which Taiwan company did SEIT students attached to in 2015?',
 			opts: [
 				{
 					val: 'A',
-					ans: '7',
+					ans: 'Novetel',
 					correctAns: false
 				},
 				{
 					val: 'B',
-					ans: '8',
+					ans: 'Nuvoton',
 					correctAns: true
 				},
 				{
 					val: 'C',
-					ans: '9',
+					ans: 'New Haven',
 					correctAns: false
 				},
 				{
 					val: 'D',
-					ans: '10',
+					ans: 'Nobel',
 					correctAns: false
 				}
 			]
 		},
 		{
 			id: 'q3',
-			qn: 'What is the maximum amount that ITE will fund each student for Enterprise Fund project?',
+			qn: 'What is the maximum amount that ITE will fund for each Student Enterprise Fund project?',
 			opts: [
 				{
 					val: 'A',
@@ -118,6 +118,32 @@ app.controller('MainCtrl', function($scope, $state, $ionicPopup) {
 					val: 'D',
 					ans: 'Yeast',
 					correctAns: false
+				}
+			]
+		},
+		{
+			id: 'q5',
+			qn: 'How many projects from School of Engineering, College West were shortlisted for LKYTA (Lee Kuan Yew Technology Award) final selection?',
+			opts: [
+				{
+					val: 'A',
+					ans: '1',
+					correctAns: false
+				},
+				{
+					val: 'B',
+					ans: '2',
+					correctAns: false
+				},
+				{
+					val: 'C',
+					ans: '3',
+					correctAns: false
+				},
+				{
+					val: 'D',
+					ans: '4',
+					correctAns: true
 				}
 			]
 		}
