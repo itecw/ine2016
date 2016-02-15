@@ -123,27 +123,27 @@ app.controller('MainCtrl', function($scope, $state, $ionicPopup) {
 		},
 		{
 			id: 'q5',
-			qn: 'How many projects from School of Engineering, College West were shortlisted for LKYTA (Lee Kuan Yew Technology Award) final selection?',
+			qn: 'Which two projects from School of Engineering, College West are shortlisted for LKYTA (Lee Kuan Yew Technology Award) final selection?',
 			opts: [
 				{
 					val: 'A',
-					ans: '1',
-					correctAns: false
+					ans: 'Fish Slicing Machine & Unmanned Fire Fighting Vehicle (UFV)',
+					correctAns: true
 				},
 				{
 					val: 'B',
-					ans: '2',
+					ans: 'Fish Slicing Machine & CAREmote',
 					correctAns: false
 				},
 				{
 					val: 'C',
-					ans: '3',
+					ans: 'Unmanned Fire Fighting Vehicle (UFV) & CAREmote',
 					correctAns: false
 				},
 				{
 					val: 'D',
-					ans: '4',
-					correctAns: true
+					ans: 'Trolley Supervisor & CAREmote',
+					correctAns: false
 				}
 			]
 		}
